@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#10B981"/>
+  
+  <!-- House roof -->
+  <path d="M16 6L6 14H9V24H23V14H26L16 6Z" fill="white"/>
+  
+  <!-- Inventory boxes (grid pattern inside house) -->
+  <rect x="11" y="15" width="4" height="4" rx="0.5" fill="#10B981"/>
+  <rect x="17" y="15" width="4" height="4" rx="0.5" fill="#10B981"/>
+  <rect x="11" y="20" width="4" height="4" rx="0.5" fill="#10B981"/>
+  <rect x="17" y="20" width="4" height="4" rx="0.5" fill="#10B981"/>
+</svg>

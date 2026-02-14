@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <!-- Background -->
+  <rect width="180" height="180" rx="40" fill="#10B981"/>
+  
+  <!-- House roof -->
+  <path d="M90 35L30 80H45V140H135V80H150L90 35Z" fill="white"/>
+  
+  <!-- Inventory boxes (grid pattern inside house) -->
+  <rect x="55" y="85" width="25" height="25" rx="3" fill="#10B981"/>
+  <rect x="100" y="85" width="25" height="25" rx="3" fill="#10B981"/>
+  <rect x="55" y="115" width="25" height="25" rx="3" fill="#10B981"/>
+  <rect x="100" y="115" width="25" height="25" rx="3" fill="#10B981"/>
+</svg>

@@ -16,7 +16,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 className="mb-2 text-xl font-bold">🏠 Iemono うちにあるものリスト</h1>
+      <h1 className="mb-2 text-xl font-bold">🏠 Iemono おうちにあるもの管理</h1>
       <Dashboard items={items} />
     </div>
   );

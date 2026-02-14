@@ -103,7 +103,7 @@ export default function SettingsPage() {
             アプリ情報
           </h2>
           <p className="text-sm text-zinc-500">Iemono v1.0.0</p>
-          <p className="text-xs text-zinc-600">おうちの在庫管理アプリ</p>
+          <p className="text-xs text-zinc-600">おうちにあるもの管理</p>
         </section>
       </div>
     </div>
