@@ -1,17 +1,21 @@
 export interface Item {
   id: string;
   name: string;
-  quantity: number;
+  category: string;
   location: string;
+  quantity: number;
+  unit: string;
   expiryDate: string; // ISO date string, empty if not set
+  alertDays: number; // 何日前から通知するか (per-item)
   memo: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface Settings {
-  notificationDays: number; // 何日前から通知するか
+  defaultAlertDays: number;
+  showExpired: boolean;
   notificationsEnabled: boolean;
 }
 
-export type ExpiryStatus = "expired" | "warning" | "ok" | "none";
+export type ExpiryStatus = "expired" | "today" | "warning" | "ok" | "none";

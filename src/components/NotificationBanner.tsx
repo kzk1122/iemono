@@ -6,23 +6,22 @@ import { getExpiryStatus } from "@/lib/expiry";
 
 interface NotificationBannerProps {
   items: Item[];
-  warningDays: number;
   enabled: boolean;
 }
 
 export default function NotificationBanner({
   items,
-  warningDays,
   enabled,
 }: NotificationBannerProps) {
   if (!enabled) return null;
 
   const expiredCount = items.filter(
-    (item) => getExpiryStatus(item.expiryDate, warningDays) === "expired"
+    (item) => getExpiryStatus(item.expiryDate, item.alertDays) === "expired"
   ).length;
-  const warningCount = items.filter(
-    (item) => getExpiryStatus(item.expiryDate, warningDays) === "warning"
-  ).length;
+  const warningCount = items.filter((item) => {
+    const s = getExpiryStatus(item.expiryDate, item.alertDays);
+    return s === "today" || s === "warning";
+  }).length;
 
   if (expiredCount === 0 && warningCount === 0) return null;
 

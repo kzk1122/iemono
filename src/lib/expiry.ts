@@ -2,7 +2,7 @@ import { ExpiryStatus } from "@/types";
 
 export function getExpiryStatus(
   expiryDate: string,
-  warningDays: number
+  alertDays: number
 ): ExpiryStatus {
   if (!expiryDate) return "none";
 
@@ -15,7 +15,8 @@ export function getExpiryStatus(
   const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
 
   if (diffDays < 0) return "expired";
-  if (diffDays <= warningDays) return "warning";
+  if (diffDays === 0) return "today";
+  if (diffDays <= alertDays) return "warning";
   return "ok";
 }
 

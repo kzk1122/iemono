@@ -9,8 +9,8 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Iemono - 食品管理",
-  description: "家庭の食品在庫をかんたん管理",
+  title: "Iemono - おうちの在庫管理",
+  description: "家庭の在庫をかんたん管理",
 };
 
 export default function RootLayout({

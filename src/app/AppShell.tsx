@@ -13,7 +13,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <NotificationBanner
         items={items}
-        warningDays={settings.notificationDays}
         enabled={settings.notificationsEnabled}
       />
       <main className="mx-auto max-w-md px-4 pb-24 pt-4">{children}</main>

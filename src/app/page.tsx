@@ -2,11 +2,9 @@
 
 import Dashboard from "@/components/Dashboard";
 import { useItems } from "@/hooks/useItems";
-import { useSettings } from "@/hooks/useSettings";
 
 export default function HomePage() {
   const { items, loaded } = useItems();
-  const { settings } = useSettings();
 
   if (!loaded) {
     return (
@@ -18,8 +16,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-xl font-bold">🏠 ホーム</h1>
-      <Dashboard items={items} warningDays={settings.notificationDays} />
+      <h1 className="mb-2 text-xl font-bold">🏠 Iemono うちにあるものリスト</h1>
+      <Dashboard items={items} />
     </div>
   );
 }

@@ -41,7 +41,7 @@ export default function EditItemPage({
 
   return (
     <div>
-      <h1 className="mb-4 text-xl font-bold">✏️ 食品を編集</h1>
+      <h1 className="mb-4 text-xl font-bold">✏️ アイテムを編集</h1>
       <ItemForm
         initialData={item}
         onSubmit={(data) => {

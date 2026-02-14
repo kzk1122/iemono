@@ -2,6 +2,7 @@
 
 import { useSettings } from "@/hooks/useSettings";
 import { useItems } from "@/hooks/useItems";
+import { ALERT_DAYS_OPTIONS } from "@/lib/constants";
 import ToggleSwitch from "@/components/ui/ToggleSwitch";
 
 export default function SettingsPage() {
@@ -47,18 +48,18 @@ export default function SettingsPage() {
             />
             <div>
               <label className="mb-1 block text-sm text-zinc-300">
-                何日前から通知する
+                デフォルト通知日数
               </label>
               <select
-                value={settings.notificationDays}
+                value={settings.defaultAlertDays}
                 onChange={(e) =>
                   updateSettings({
-                    notificationDays: Number(e.target.value),
+                    defaultAlertDays: Number(e.target.value),
                   })
                 }
                 className="rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-emerald-500"
               >
-                {[1, 2, 3, 5, 7, 14, 30].map((d) => (
+                {ALERT_DAYS_OPTIONS.map((d) => (
                   <option key={d} value={d}>
                     {d}日前
                   </option>
@@ -66,6 +67,20 @@ export default function SettingsPage() {
               </select>
             </div>
           </div>
+        </section>
+
+        {/* 表示設定 */}
+        <section className="rounded-xl bg-zinc-800/60 p-4">
+          <h2 className="mb-4 text-sm font-semibold text-zinc-400">
+            表示設定
+          </h2>
+          <ToggleSwitch
+            label="期限切れアイテムを表示"
+            checked={settings.showExpired}
+            onChange={(checked) =>
+              updateSettings({ showExpired: checked })
+            }
+          />
         </section>
 
         {/* データ */}
@@ -88,7 +103,7 @@ export default function SettingsPage() {
             アプリ情報
           </h2>
           <p className="text-sm text-zinc-500">Iemono v1.0.0</p>
-          <p className="text-xs text-zinc-600">食品在庫管理アプリ</p>
+          <p className="text-xs text-zinc-600">おうちの在庫管理アプリ</p>
         </section>
       </div>
     </div>

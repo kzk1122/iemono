@@ -3,16 +3,24 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Item } from "@/types";
-import { STORAGE_LOCATIONS } from "@/lib/constants";
+import {
+  CATEGORIES,
+  STORAGE_LOCATIONS,
+  ALERT_DAYS_OPTIONS,
+  EXPIRY_CATEGORIES,
+} from "@/lib/constants";
 import CalendarPicker from "@/components/ui/CalendarPicker";
 
 interface ItemFormProps {
   initialData?: Item;
   onSubmit: (data: {
     name: string;
-    quantity: number;
+    category: string;
     location: string;
+    quantity: number;
+    unit: string;
     expiryDate: string;
+    alertDays: number;
     memo: string;
   }) => void;
 }
@@ -20,26 +28,40 @@ interface ItemFormProps {
 export default function ItemForm({ initialData, onSubmit }: ItemFormProps) {
   const router = useRouter();
   const [name, setName] = useState(initialData?.name ?? "");
-  const [quantity, setQuantity] = useState(initialData?.quantity ?? 1);
+  const [category, setCategory] = useState(initialData?.category ?? "food");
   const [location, setLocation] = useState(
     initialData?.location ?? STORAGE_LOCATIONS[0].id
   );
+  const [quantity, setQuantity] = useState(initialData?.quantity ?? 1);
+  const [unit, setUnit] = useState(initialData?.unit ?? "個");
   const [expiryDate, setExpiryDate] = useState(initialData?.expiryDate ?? "");
+  const [alertDays, setAlertDays] = useState(initialData?.alertDays ?? 3);
   const [memo, setMemo] = useState(initialData?.memo ?? "");
+
+  const showExpiry = (EXPIRY_CATEGORIES as readonly string[]).includes(category);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
-    onSubmit({ name: name.trim(), quantity, location, expiryDate, memo: memo.trim() });
+    onSubmit({
+      name: name.trim(),
+      category,
+      location,
+      quantity,
+      unit: unit.trim() || "個",
+      expiryDate: showExpiry ? expiryDate : "",
+      alertDays,
+      memo: memo.trim(),
+    });
     router.push("/items");
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      {/* 名前 */}
+      {/* アイテム名 */}
       <div>
         <label className="mb-1 block text-sm font-medium text-zinc-300">
-          食品名 <span className="text-red-400">*</span>
+          アイテム名 <span className="text-red-400">*</span>
         </label>
         <input
           type="text"
@@ -51,29 +73,32 @@ export default function ItemForm({ initialData, onSubmit }: ItemFormProps) {
         />
       </div>
 
-      {/* 数量 */}
+      {/* カテゴリ */}
       <div>
         <label className="mb-1 block text-sm font-medium text-zinc-300">
-          数量
+          カテゴリ
         </label>
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-700 text-lg text-zinc-300 hover:bg-zinc-600"
-          >
-            -
-          </button>
-          <span className="min-w-[2rem] text-center text-lg font-semibold text-zinc-100">
-            {quantity}
-          </span>
-          <button
-            type="button"
-            onClick={() => setQuantity((q) => q + 1)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-700 text-lg text-zinc-300 hover:bg-zinc-600"
-          >
-            +
-          </button>
+        <div className="grid grid-cols-3 gap-2">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setCategory(cat.id)}
+              className={`rounded-xl border px-2 py-2.5 text-center text-xs transition-colors ${
+                category === cat.id
+                  ? "border-current font-semibold"
+                  : "border-zinc-700 bg-zinc-800/60 text-zinc-400 hover:bg-zinc-700"
+              }`}
+              style={
+                category === cat.id
+                  ? { color: cat.color, backgroundColor: `${cat.color}15`, borderColor: `${cat.color}40` }
+                  : undefined
+              }
+            >
+              <div className="mb-0.5 text-lg">{cat.emoji}</div>
+              {cat.label}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -82,31 +107,97 @@ export default function ItemForm({ initialData, onSubmit }: ItemFormProps) {
         <label className="mb-1 block text-sm font-medium text-zinc-300">
           保管場所
         </label>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {STORAGE_LOCATIONS.map((loc) => (
             <button
               key={loc.id}
               type="button"
               onClick={() => setLocation(loc.id)}
-              className={`rounded-full px-3 py-1.5 text-sm transition-colors ${
+              className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
                 location === loc.id
-                  ? "bg-emerald-600 text-white"
-                  : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                  ? "border-emerald-500/40 bg-emerald-500/10 font-semibold text-emerald-400"
+                  : "border-zinc-700 bg-zinc-800/60 text-zinc-400 hover:bg-zinc-700"
               }`}
             >
-              {loc.emoji} {loc.label}
+              <span className="text-base">{loc.emoji}</span> {loc.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* 賞味期限 */}
-      <div>
-        <label className="mb-1 block text-sm font-medium text-zinc-300">
-          賞味期限
-        </label>
-        <CalendarPicker value={expiryDate} onChange={setExpiryDate} />
+      {/* 数量・単位 */}
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <label className="mb-1 block text-sm font-medium text-zinc-300">
+            数量
+          </label>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-700 text-lg text-zinc-300 hover:bg-zinc-600"
+            >
+              -
+            </button>
+            <span className="min-w-[2rem] text-center text-lg font-semibold text-zinc-100">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              onClick={() => setQuantity((q) => q + 1)}
+              className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-700 text-lg text-zinc-300 hover:bg-zinc-600"
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-zinc-300">
+            単位
+          </label>
+          <input
+            type="text"
+            value={unit}
+            onChange={(e) => setUnit(e.target.value)}
+            placeholder="個, 本, 袋..."
+            className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+          />
+        </div>
       </div>
+
+      {/* 賞味期限 (食品・薬のみ) */}
+      {showExpiry && (
+        <>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-zinc-300">
+              賞味期限
+            </label>
+            <CalendarPicker value={expiryDate} onChange={setExpiryDate} />
+          </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-zinc-300">
+              通知タイミング（期限の何日前）
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {ALERT_DAYS_OPTIONS.map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => setAlertDays(d)}
+                  className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
+                    alertDays === d
+                      ? "border-emerald-500/40 bg-emerald-500/10 font-semibold text-emerald-400"
+                      : "border-zinc-700 bg-zinc-800/60 text-zinc-400 hover:bg-zinc-700"
+                  }`}
+                >
+                  {d}日前
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
 
       {/* メモ */}
       <div>

@@ -8,7 +8,7 @@ export default function NewItemPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-xl font-bold">➕ 食品を追加</h1>
+      <h1 className="mb-4 text-xl font-bold">➕ アイテムを追加</h1>
       <ItemForm onSubmit={addItem} />
     </div>
   );
