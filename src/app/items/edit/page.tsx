@@ -1,16 +1,13 @@
 "use client";
 
-import { use } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import ItemForm from "@/components/ItemForm";
 import { useItems } from "@/hooks/useItems";
 
-export default function EditItemPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
+function EditItemContent() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const { getItem, updateItem, loaded } = useItems();
   const router = useRouter();
 
@@ -22,7 +19,7 @@ export default function EditItemPage({
     );
   }
 
-  const item = getItem(id);
+  const item = id ? getItem(id) : null;
 
   if (!item) {
     return (
@@ -45,9 +42,17 @@ export default function EditItemPage({
       <ItemForm
         initialData={item}
         onSubmit={(data) => {
-          updateItem(id, data);
+          updateItem(id!, data);
         }}
       />
     </div>
+  );
+}
+
+export default function EditItemPage() {
+  return (
+    <Suspense>
+      <EditItemContent />
+    </Suspense>
   );
 }

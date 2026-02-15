@@ -91,7 +91,7 @@ export default function ItemCard({ item, onDelete }: ItemCardProps) {
           )}
           <div className="flex gap-1">
             <Link
-              href={`/items/${item.id}/edit`}
+              href={`/items/edit?id=${item.id}`}
               className="rounded-lg bg-zinc-200 dark:bg-zinc-700 px-2.5 py-1 text-xs text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-600"
             >
               編集
