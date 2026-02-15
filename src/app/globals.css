@@ -14,6 +14,63 @@
 }
 
 body {
-  background: var(--color-background);
   color: var(--color-foreground);
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(59, 130, 246, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(168, 85, 247, 0.06) 0%, transparent 40%),
+    #e4e4e7;
+  background-attachment: fixed;
+}
+
+.dark body,
+body:where(.dark *) {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(16, 185, 129, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(168, 85, 247, 0.05) 0%, transparent 40%),
+    #18181b;
+  background-attachment: fixed;
+}
+
+/* PC サイド装飾画像 */
+body::before,
+body::after {
+  content: "";
+  display: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 600px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("/side-light.png");
+}
+
+body::before {
+  right: calc(50% + 240px);
+}
+
+body::after {
+  left: calc(50% + 240px);
+  transform: translateY(-50%);
+}
+
+.dark body::before,
+body:where(.dark *)::before,
+.dark body::after,
+body:where(.dark *)::after {
+  background-image: url("/side-dark.png");
+}
+
+@media (min-width: 900px) {
+  body::before,
+  body::after {
+    display: block;
+  }
 }

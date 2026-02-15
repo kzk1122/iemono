@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className="dark" suppressHydrationWarning>
-      <body className={`${notoSansJP.variable} font-sans antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100`}>
+      <body className={`${notoSansJP.variable} font-sans antialiased text-zinc-900 dark:text-zinc-100`}>
         <AppShell>{children}</AppShell>
       </body>
     </html>

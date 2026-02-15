@@ -27,13 +27,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   }, [settings.theme]);
 
   return (
-    <>
+    <div className="mx-auto flex min-h-dvh max-w-md flex-col border-x border-zinc-300 bg-zinc-50 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-zinc-950/50">
       <NotificationBanner
         items={items}
         enabled={settings.notificationsEnabled}
       />
-      <main className="mx-auto max-w-md px-4 pb-24 pt-4">{children}</main>
+      <main className="flex-1 px-4 pb-24 pt-4">{children}</main>
       <BottomNav />
-    </>
+    </div>
   );
 }
