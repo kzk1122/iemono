@@ -16,6 +16,7 @@ export interface Settings {
   defaultAlertDays: number;
   showExpired: boolean;
   notificationsEnabled: boolean;
+  theme: "light" | "dark" | "system";
 }
 
 export type ExpiryStatus = "expired" | "today" | "warning" | "ok" | "none";

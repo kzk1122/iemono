@@ -74,10 +74,10 @@ export default function Dashboard({ items }: DashboardProps) {
       {/* 賞味期限タイムライン */}
       {expiryItems.length > 0 && (
         <div>
-          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-zinc-400">
+          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400">
             <span>📅</span> 賞味期限タイムライン
           </h2>
-          <div className="overflow-hidden rounded-xl border border-zinc-800">
+          <div className="overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
             {expiryItems.map((item, idx) => {
               const days = getDaysUntilExpiry(item.expiryDate)!;
               const status = getExpiryStatus(item.expiryDate, item.alertDays);
@@ -100,7 +100,7 @@ export default function Dashboard({ items }: DashboardProps) {
                 <div
                   key={item.id}
                   className={`flex items-center gap-3 px-4 py-3 ${
-                    idx < expiryItems.length - 1 ? "border-b border-zinc-800/60" : ""
+                    idx < expiryItems.length - 1 ? "border-b border-zinc-200/60 dark:border-zinc-800/60" : ""
                   }`}
                 >
                   <div
@@ -110,10 +110,10 @@ export default function Dashboard({ items }: DashboardProps) {
                     {cat?.emoji}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="mb-1 text-sm font-semibold text-zinc-100">
+                    <div className="mb-1 text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                       {item.name}
                     </div>
-                    <div className="h-1 overflow-hidden rounded-full bg-zinc-800">
+                    <div className="h-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
                       <div
                         className="h-full rounded-full transition-all duration-500"
                         style={{ width: `${barWidth}%`, backgroundColor: barColor }}
@@ -142,7 +142,7 @@ export default function Dashboard({ items }: DashboardProps) {
       {/* カテゴリ別 */}
       {categoryStats.length > 0 && (
         <div>
-          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-zinc-400">
+          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400">
             <span>📊</span> カテゴリ別
           </h2>
           <div className="grid grid-cols-2 gap-2">
@@ -150,11 +150,11 @@ export default function Dashboard({ items }: DashboardProps) {
               <Link
                 key={cat.id}
                 href={`/items?category=${cat.id}`}
-                className="flex items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-800/30 p-3 transition-colors hover:bg-zinc-800/60"
+                className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-800/30 p-3 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800/60"
               >
                 <span className="text-xl">{cat.emoji}</span>
                 <div>
-                  <div className="text-xs font-semibold text-zinc-200">
+                  <div className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">
                     {cat.label}
                   </div>
                   <div
@@ -173,17 +173,17 @@ export default function Dashboard({ items }: DashboardProps) {
       {/* 保管場所別 */}
       {locationCounts.length > 0 && (
         <div>
-          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-zinc-400">
+          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400">
             <span>🏠</span> 保管場所
           </h2>
           <div className="flex flex-wrap gap-2">
             {locationCounts.map((loc) => (
               <div
                 key={loc.id}
-                className="flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-800/30 px-3 py-1.5 text-xs"
+                className="flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-800/30 px-3 py-1.5 text-xs"
               >
                 <span>{loc.emoji}</span>
-                <span className="text-zinc-400">{loc.label}</span>
+                <span className="text-zinc-500 dark:text-zinc-400">{loc.label}</span>
                 <span className="font-bold text-blue-400">{loc.count}</span>
               </div>
             ))}

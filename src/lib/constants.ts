@@ -34,10 +34,12 @@ export const DEFAULT_SETTINGS: {
   defaultAlertDays: number;
   showExpired: boolean;
   notificationsEnabled: boolean;
+  theme: "light" | "dark" | "system";
 } = {
   defaultAlertDays: 3,
   showExpired: true,
   notificationsEnabled: true,
+  theme: "dark",
 };
 
 export const STORAGE_KEYS = {

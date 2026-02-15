@@ -31,7 +31,7 @@ export default function EditItemPage({
         <p className="text-sm">アイテムが見つかりません</p>
         <button
           onClick={() => router.push("/items")}
-          className="mt-3 rounded-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-600"
+          className="mt-3 rounded-lg bg-zinc-200 dark:bg-zinc-700 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-600"
         >
           一覧に戻る
         </button>

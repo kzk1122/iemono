@@ -19,7 +19,7 @@ export default function FilterChip({
       className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors whitespace-nowrap ${
         active
           ? "bg-emerald-600 text-white"
-          : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+          : "bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700"
       }`}
     >
       {emoji && <span>{emoji}</span>}
