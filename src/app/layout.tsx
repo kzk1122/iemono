@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
-      <body className={`${notoSansJP.variable} font-sans antialiased bg-zinc-950 text-zinc-100`}>
+    <html lang="ja" className="dark" suppressHydrationWarning>
+      <body className={`${notoSansJP.variable} font-sans antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100`}>
         <AppShell>{children}</AppShell>
       </body>
     </html>

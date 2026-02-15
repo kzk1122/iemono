@@ -1,9 +1,16 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
+  --color-background: #fafafa;
+  --color-foreground: #18181b;
+  --font-sans: var(--font-noto-sans-jp);
+}
+
+.dark {
   --color-background: #0a0a0a;
   --color-foreground: #ededed;
-  --font-sans: var(--font-noto-sans-jp);
 }
 
 body {

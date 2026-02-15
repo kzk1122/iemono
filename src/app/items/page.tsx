@@ -100,7 +100,7 @@ function ItemsPageContent() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="アイテムを検索..."
-          className="w-full rounded-lg border border-zinc-700 bg-zinc-800 py-2 pl-9 pr-3 text-sm text-zinc-100 placeholder-zinc-500 outline-none focus:border-emerald-500"
+          className="w-full rounded-lg border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 py-2 pl-9 pr-3 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 outline-none focus:border-emerald-500"
         />
       </div>
 
@@ -111,7 +111,7 @@ function ItemsPageContent() {
           className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
             showFilters
               ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-              : "border-zinc-700 bg-zinc-800/60 text-zinc-400"
+              : "border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400"
           }`}
         >
           🎛️ フィルタ {showFilters ? "▲" : "▼"}
@@ -121,7 +121,7 @@ function ItemsPageContent() {
 
       {/* フィルタパネル */}
       {showFilters && (
-        <div className="mb-4 space-y-3 rounded-xl border border-zinc-800 bg-zinc-800/30 p-4">
+        <div className="mb-4 space-y-3 rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-800/30 p-4">
           {/* カテゴリ */}
           <div>
             <label className="mb-2 block text-xs text-zinc-500">カテゴリ</label>

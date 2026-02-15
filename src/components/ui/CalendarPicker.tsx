@@ -91,40 +91,40 @@ export default function CalendarPicker({ value, onChange }: CalendarPickerProps)
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2.5 text-sm text-left outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+        className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 px-3 py-2.5 text-sm text-left outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
       >
-        <span className={value ? "text-zinc-100" : "text-zinc-500"}>
+        <span className={value ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-500"}>
           {value ? `📅 ${displayValue}` : "日付を選択..."}
         </span>
-        <span className="text-zinc-500">▼</span>
+        <span className="text-zinc-400 dark:text-zinc-500">▼</span>
       </button>
 
       {/* カレンダー本体 */}
       {open && (
-        <div className="absolute left-0 right-0 z-50 mt-1 rounded-xl border border-zinc-700 bg-zinc-800 p-3 shadow-xl">
+        <div className="absolute left-0 right-0 z-50 mt-1 rounded-xl border border-zinc-300 bg-white dark:border-zinc-700 dark:bg-zinc-800 p-3 shadow-xl">
           {/* ヘッダー: 月移動 */}
           <div className="mb-2 flex items-center justify-between">
             <button
               type="button"
               onClick={prevMonth}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 hover:text-zinc-700 dark:hover:text-zinc-200"
             >
               ◀
             </button>
-            <span className="text-sm font-semibold text-zinc-200">
+            <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-200">
               {viewYear}年 {viewMonth + 1}月
             </span>
             <button
               type="button"
               onClick={nextMonth}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 hover:text-zinc-700 dark:hover:text-zinc-200"
             >
               ▶
             </button>
           </div>
 
           {/* 曜日ヘッダー */}
-          <div className="mb-1 grid grid-cols-7 text-center text-xs text-zinc-500">
+          <div className="mb-1 grid grid-cols-7 text-center text-xs text-zinc-400 dark:text-zinc-500">
             {WEEKDAYS.map((d) => (
               <span key={d} className="py-1">
                 {d}
@@ -154,8 +154,8 @@ export default function CalendarPicker({ value, onChange }: CalendarPickerProps)
                     isSelected
                       ? "bg-emerald-600 font-semibold text-white"
                       : isToday
-                        ? "bg-zinc-700 font-semibold text-emerald-400"
-                        : "text-zinc-300 hover:bg-zinc-700"
+                        ? "bg-zinc-200 dark:bg-zinc-700 font-semibold text-emerald-400"
+                        : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                   }`}
                 >
                   {day}
@@ -165,7 +165,7 @@ export default function CalendarPicker({ value, onChange }: CalendarPickerProps)
           </div>
 
           {/* フッター */}
-          <div className="mt-2 flex justify-between border-t border-zinc-700 pt-2">
+          <div className="mt-2 flex justify-between border-t border-zinc-200 dark:border-zinc-700 pt-2">
             <button
               type="button"
               onClick={() => {
@@ -173,7 +173,7 @@ export default function CalendarPicker({ value, onChange }: CalendarPickerProps)
                 setViewMonth(today.getMonth());
                 selectDay(today.getDate());
               }}
-              className="rounded-lg px-3 py-1 text-xs text-emerald-400 hover:bg-zinc-700"
+              className="rounded-lg px-3 py-1 text-xs text-emerald-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
             >
               今日
             </button>
@@ -181,7 +181,7 @@ export default function CalendarPicker({ value, onChange }: CalendarPickerProps)
               <button
                 type="button"
                 onClick={clear}
-                className="rounded-lg px-3 py-1 text-xs text-red-400 hover:bg-zinc-700"
+                className="rounded-lg px-3 py-1 text-xs text-red-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
               >
                 クリア
               </button>
